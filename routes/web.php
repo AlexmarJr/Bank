@@ -25,3 +25,4 @@ Route::get('/deposit_boleto', 'DepositTicketController@index')->name('boleto_ind
 Route::post('/save_boleto', 'DepositTicketController@deposit')->name('post.boleto');
 
 Route::get('/payment', 'PaymentController@index')->name('payment_index');
+Route::get('/payment_get/{id?}', 'PaymentController@get_boleto')->name('get_boleto');

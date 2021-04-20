@@ -18,10 +18,50 @@
       </div>
       <hr>
       <button class="btn btn-success" onclick="post_boleto()">Gerar Boleto</button>
-      <button class="btn btn-warning" onclick="post_boleto()">Historico de Boletos</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Historico de Boletos</button>
     </div>
 
-    
+
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-body">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Codigo</th>
+                  <th>Data de Criação</th>
+                  <th>Data de Vencimento</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                @foreach($data as $value)
+                  <tr>
+                    <td>{{ $value->barcode }}</td>
+                    <td>{{ $value->created_at }}</td>
+                    <td>{{ $value->validity }}</td>
+                    <td>
+                      @if($value->status == 1) <div class="alert alert-success">
+                      <strong>Boleto Pago</strong>
+                    </div>
+                      @elseif($value->status == 0) <div class="alert alert-warning">
+                        <strong>Em Aberto</strong> Ou Passou da Data Limite.
+                      </div>
+
+                      @endif
+                  </td>
+                  </tr>
+                @endforeach
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     <script>
     datePickerId.min = new Date().toISOString().split("T")[0];
     $('.dinheiro').mask('###.000.000,00', {reverse: true});

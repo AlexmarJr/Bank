@@ -9,7 +9,8 @@ use Auth;
 class DepositTicketController extends Controller
 {
     public function index(){
-        return view('deposit');
+        $data = depositTicket::all();
+        return view('deposit', compact('data'));
     }
 
     public function deposit(Request $request){
