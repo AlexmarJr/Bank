@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('cpf')->unique();
             $table->string('phone')->unique();
 
-            $table->string('pix')->nullable();
+            $table->json('pix')->nullable();
             $table->json('extract')->nullable();
             $table->integer('balance')->default(0);
             $table->integer('stocks')->default(0);

@@ -15,6 +15,17 @@ class DepositTicketController extends Controller
 
     public function deposit(Request $request){
         $barcode = rand(1111111111111,9999999999999);
+        $check = true;
+
+        while($check == true){
+            $c = depositTicket::where('barcode','=', $check)->first();
+            if(!empty($c)){
+                $barcode = rand(1111111111111,9999999999999);
+            }
+            else{
+                $check = false;
+            }
+        }
         if($request->ajax())
         {
             depositTicket::create([

@@ -30,6 +30,7 @@
               <thead>
                 <tr>
                   <th>Codigo</th>
+                  <th>Valor</th>
                   <th>Data de Criação</th>
                   <th>Data de Vencimento</th>
                   <th>Status</th>
@@ -40,14 +41,19 @@
                 @foreach($data as $value)
                   <tr>
                     <td>{{ $value->barcode }}</td>
+                    <td>{{number_format((int)$value->value_boleto / 100, 2, ',', '.') }}</td>
                     <td>{{ $value->created_at }}</td>
                     <td>{{ $value->validity }}</td>
                     <td>
                       @if($value->status == 1) <div class="alert alert-success">
                       <strong>Boleto Pago</strong>
-                    </div>
+                      </div>
+                      @elseif($value->validity < \Carbon\Carbon::now())
+                      <div class="alert alert-danger">
+                        <strong>Boleto Vencido</strong>
+                      </div>
                       @elseif($value->status == 0) <div class="alert alert-warning">
-                        <strong>Em Aberto</strong> Ou Passou da Data Limite.
+                        <strong>Em Aberto</strong>
                       </div>
 
                       @endif
@@ -72,7 +78,7 @@
            url: "{{ route('post.boleto') }}",
            data: {
               "_token": "{{ csrf_token() }}",
-               'value_boleto':  $("#value_boleto").val(),
+               'value_boleto':  parseInt(($("#value_boleto").val().replace(',',''))),
                'validity':  $("#datePickerId").val(),
            },
            success: function(barcode) {

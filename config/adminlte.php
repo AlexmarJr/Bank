@@ -232,9 +232,10 @@ return [
 
         [
             'text' => 'Perfil',
-            'url'  => 'admin/settings',
+            'url'  => '/profile',
             'icon' => 'fas fa-fw fa-user',
         ],
+        
         [
             'text'    => 'Transferencia',
             'icon'    => 'fas fa-fw fa-share',
@@ -263,6 +264,11 @@ return [
                 ],
               
             ],
+        ],
+        [
+            'text' => 'Investimentos',
+            'url'  => '/investments',
+            'icon' => 'fas fa-fw fa-money',
         ],
 
     ],

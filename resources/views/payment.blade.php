@@ -21,6 +21,7 @@
     
 <script>
     function get_boleto(){
+        var d = new Date();
         if($("#boleto").val().length == 13){
             var barcode = $("#boleto").val();
             $.ajax({
@@ -30,7 +31,7 @@
                 success: function (response) {
                     $("#id_boleto").val(response.id);
                     $("#owner").text(response.owner);
-                    $("#price").text( "R$: " + response.value_boleto);
+                    $("#price").text( "R$: " + Intl.NumberFormat('en-IN', { style: 'currency', currency: 'BRL' }).format(response.value_boleto / 100));
                     $("#expiration_date").text(response.validity);
                     $("#info").css({'display': 'block'});
                 }
@@ -42,14 +43,31 @@
         var id = $("#id_boleto").val();
         var d = new Date();
 
-        if($("#expiration_date").val() < d){
-            swal.fire({ 
-                icon: 'error',
-                title: 'Falha no Pagamento',
-                text: 'Esse Boleto ja se expirou',
-            });
-        }
+            $.ajax({
+            url:"/payment_post/" + id,
+            type: "get",
+            dataType: 'json',
+                success: function (response) {
+                   if(response == 0){
+                        swal.fire('Falha no Pagamento, Verifique se possue saldo.');
+                   }
+                   else if(response == 1){
+                        swal.fire('Falha no Pagamento,Validade do boleto Expirada.');
+                   }
+                   else if(response == 2){
+                        swal.fire('Boleto já Pago.');
+                   }
+                   else if(response == 3){
+                        swal.fire('Sucesso no Pagamento.');
+                   }
+                   else{
+                       swal.fire('Opção invalida');
+                   }
 
+
+                },
+                
+            })
 
     }
 </script>
