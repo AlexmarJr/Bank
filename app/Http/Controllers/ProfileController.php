@@ -19,7 +19,7 @@ class ProfileController extends Controller
     public function save_pix(Request $request){
         if($request->ajax()){
             if($request->type == 'random'){
-                $request->key = rand(11111111,999999999);
+                $request->key = strval(rand(11111111,999999999));
             }
             $user = User::find(Auth::id());
             $user_pix = json_decode($user->pix);

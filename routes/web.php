@@ -36,3 +36,15 @@ Route::post('/save_pix', 'ProfileController@save_pix')->name('post.pix');
 
 
 Route::get('/add_founds', 'PaymentController@add_founds')->name('add_founds');
+Route::get('/transfer', 'TransferController@index')->name('index_transfer');
+Route::get('/pix_get/{type?}/{key?}', 'TransferController@pix_get')->name('pix_get');
+Route::post('/post_pix', 'TransferController@post_pix')->name('post_pix');
+
+
+Route::get('/withdraw', 'WithdrawController@index_withdraw')->name('index_withdraw');
+Route::get('/withdraw/{id?}', 'WithdrawController@withdraw')->name('withdraw');
+
+
+Route::get('/investments', 'InvestmentsController@investments_Index')->name('investments');
+Route::get('/withdraw_founds', 'InvestmentsController@withdraw_founds')->name('withdraw_founds');
+Route::get('/investments/{id?}', 'InvestmentsController@investments_post')->name('investments_post');

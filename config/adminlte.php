@@ -235,21 +235,17 @@ return [
             'url'  => '/profile',
             'icon' => 'fas fa-fw fa-user',
         ],
-        
         [
-            'text'    => 'Transferencia',
-            'icon'    => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'PIX',
-                    'url'  => '#',
-                ],
-                [
-                    'text' => 'TED',
-                    'url'  => '#',
-                ],
-            ],
+            'text' => 'Transferencia',
+            'url'  => '/transfer',
+            'icon' => 'fas fa-fw fa-share',
         ],
+        [
+            'text' => 'Saque',
+            'url'  => '/withdraw',
+            'icon' => 'fas fa-fw fa-money',
+        ],
+        
         [
             'text'    => 'Boleto',
             'icon' => 'fas fa-coins',

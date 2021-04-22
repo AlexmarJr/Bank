@@ -1,4 +1,5 @@
 @extends('adminlte::page')
+@include('layouts.cdn')
 
 @section('content')
     <div class="container">

@@ -78,11 +78,11 @@
            url: "{{ route('post.boleto') }}",
            data: {
               "_token": "{{ csrf_token() }}",
-               'value_boleto':  parseInt(($("#value_boleto").val().replace(',',''))),
+               'value_boleto':  parseInt(($("#value_boleto").val().replace(',','').replace('.',''))),
                'validity':  $("#datePickerId").val(),
            },
            success: function(barcode) {
-               swal.fire('Boleto Gerado', 'Codigo de Barras: '+ barcode, 'success');
+               swal.fire('Boleto Gerado', 'Codigo de Barras: '+ barcode);
                $('#value_boleto').val('');
                $('#datePickerId').val('');
            },
